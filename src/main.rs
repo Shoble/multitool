@@ -1,7 +1,6 @@
 use std::io;
 
-fn main() {
-    // The Selector
+fn main() { // The Selector
     let mut input: String = String::new(); // Creates a mutable input string
 
     println!("Silly multitool thingy \n 1. Calculator \n 2. Temprature Convertion \n 3. Color Selector \n 4. GIF recorder \n 5. Video to GIF");
@@ -85,12 +84,12 @@ fn temprature_convertion() {
     main();
 }
 
-fn convert_fahrenheit(temp: f64) -> f64 {
+fn convert_fahrenheit(temp: f64) -> f64 { // Converts Fahrenheit to Celsius
     let convertion: f64 = 5.0 / 9.0;
     let temp: f64 = temp - 32.0;
     temp * convertion
 }
 
-fn convert_celsius(temp: f64) -> f64 {
+fn convert_celsius(temp: f64) -> f64 { // Converts Celsius to Fahrenheit
     temp * 1.8 + 32.0
 }
