@@ -1,9 +1,10 @@
 use std::io;
 
 fn main() {
+    // The Selector
     let mut input: String = String::new(); // Creates a mutable input string
 
-    println!("Silly multitool thingy \n 1. Calculator \n 2. Color Selector \n 3. GIF recorder \n 4. Video to GIF");
+    println!("Silly multitool thingy \n 1. Calculator \n 2. Temprature Convertion \n 3. Color Selector \n 4. GIF recorder \n 5. Video to GIF");
 
     io::stdin().read_line(&mut input).expect("Failed to read line"); // Tries to read user input
 
@@ -11,7 +12,7 @@ fn main() {
 
     match input { // Switch statement in Rust
         1 => calculator(),
-        2 => println!("Temprature convertion"),
+        2 => temprature_convertion(),
         3 => println!("Color selector"),
         4 => println!("GIF recorder"),
         5 => println!("Video to GIF"),
@@ -61,4 +62,35 @@ You can reuse the result of the previous calculation by leaving the input blank.
         println!("= {}", result); // Prints the result
     }
     main();
+}
+
+
+
+// Temprature convertion
+
+fn temprature_convertion() {
+    loop { // Loop so you can convert multiple times
+        // Creating user input string
+        let mut input_temp: String = String::new();
+
+        println!("Temprature convertion between Celsius and Fahrenheit. Please enter the temprature you would like to convert or enter back to return to the selector:");
+
+        io::stdin().read_line(&mut input_temp).expect("Failed to read line."); // Taking user input
+        if input_temp.trim() == "back" { break; } // Checking if user wants to return to selector
+        let input_temp: f64 = input_temp.trim().parse().expect("Please enter a number"); // Converts user input to number
+
+        println!("{input_temp}°F in Celsius is {}°C", convert_fahrenheit(input_temp));
+        println!("{input_temp}°C in Fahrenheit is {}°F", convert_celsius(input_temp));
+    }
+    main();
+}
+
+fn convert_fahrenheit(temp: f64) -> f64 {
+    let convertion: f64 = 5.0 / 9.0;
+    let temp: f64 = temp - 32.0;
+    temp * convertion
+}
+
+fn convert_celsius(temp: f64) -> f64 {
+    temp * 1.8 + 32.0
 }
