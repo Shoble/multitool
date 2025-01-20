@@ -20,26 +20,39 @@ fn main() {
 
 fn calculator() {
     println!("Enter the first part of the calculation, then the operator and then the last part of the calculation. 
-You can reuse the result of the previous calculation by leaving the input blank.");
+You can reuse the result of the previous calculation by leaving the input blank. You can return to the selector at any point by entering back.");
+    let mut result: f64 = 0.0;
+    loop {
+        let mut first:String = String::new();
+        let mut operator:String = String::new();
+        let mut last:String = String::new();
+
+        io::stdin().read_line(&mut first).expect("Failed to read line.");
+        if first.trim() == "back" { break; }
+        let first: f64 = match first.trim().parse() {
+            Ok(num) => num,
+            Err(_) => result,
+        };
     
-    let mut first:String = String::new();
-    let mut operator:String = String::new();
-    let mut last:String = String::new();
+        io::stdin().read_line(&mut operator).expect("Failed to read line");
+        if operator.trim() == "back" { break; }
 
-    io::stdin().read_line(&mut first).expect("Failed to read line.");
-    let first: f64 = first.trim().parse().expect("Please input a number.");
-    
-    io::stdin().read_line(&mut operator).expect("Failed to read line");
+        io::stdin().read_line(&mut last).expect("Failed to read line.");
+        if last.trim() == "back" { break; }
+        let last: f64 = match last.trim().parse() {
+            Ok(num) => num,
+            Err(_) => result,
+        };
 
-    io::stdin().read_line(&mut last).expect("Failed to read line.");
-    let last: f64 = last.trim().parse().expect("Please input a number.");
-
-    match operator.trim() {
-        "+" => println!("= {}", first + last),
-        "-" => println!("= {}", first - last),
-        "*" => println!("= {}", first * last),
-        "/" => println!("= {}", first / last),
-        "%" => println!("= {}", first % last),
-        _ => println!("Please input a valid operator"),
+        match operator.trim() {
+            "+" => result = first + last,
+            "*" => result = first * last,
+            "/" => result = first / last,
+            "-" => result = first - last,
+            "%" => result = first % last,
+            _ => println!("Please input a valid operator"),
+        }
+        println!("= {}", result);
     }
+    main();
 }
